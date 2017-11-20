@@ -150,6 +150,16 @@ form-control {
     display: block;
 }
 
-    .gigs > li .details .genre {
+.gigs > li .details .genre {
         font-size: 14px;
-    }
+}
+
+.gigs > li .actions {
+        font-size:15px;
+        display:none;
+}
+
+.gigs > li:hover .actions {
+    display:block;
+}
+

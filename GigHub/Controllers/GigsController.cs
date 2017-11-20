@@ -29,7 +29,7 @@ namespace GigHub.Controllers
             return View(gigs);
         }
 
-        
+
 
 
         [Authorize]
@@ -90,6 +90,25 @@ namespace GigHub.Controllers
             _context.SaveChanges();
 
             return RedirectToAction("Mine", "Gigs");
+        }
+
+
+        public ActionResult Edit(int id)
+        {
+
+            var userId = User.Identity.GetUserId();
+            var gig = _context.Gigs.Single(g => g.Id == id && g.ArtistId == userId);
+
+            var viewModel = new GigFormViewModel
+            {
+                Genres = _context.Genres.ToList(),
+                Date = gig.DateTime.ToString("yyyy-MM-dd"),
+                Time = gig.DateTime.ToString("HH:mm"),
+                Genre = gig.GenreId,
+                Venue = gig.Venue
+            };
+
+            return View("Create", viewModel);
         }
     }
 }
